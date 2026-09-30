@@ -71,6 +71,14 @@ eval:
   # Prompt ends here. The scored continuation is " {letter}".
   prompt_suffix: "Answer:"
 
+# WP2 data prep. Does not change model.vocab_size, depth, width, p_new,
+# or MATCH_TOKENS. See AMENDMENTS.md amendment 001. 4096 is the training
+# target for a byte-level BPE on the cleaned chapters. Block length is 512.
+wp2:
+  vocab_size: 4096
+  block_size: 512
+  min_frequency: 2
+
 # Acceptance harness only. Not the Class 1–6 run.
 wp0:
   overfit_steps: 400

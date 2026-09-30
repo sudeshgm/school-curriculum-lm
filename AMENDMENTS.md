@@ -34,3 +34,14 @@ What WP0 locked from the handoff text itself, without renumbering:
 `train.*` in `configs/default.yaml` is the public GPT-2 small AdamW recipe (lr `6e-4`, betas `0.9/0.95`, weight decay `0.1`) so the file is runnable. It is not claimed to be a verbatim copy of the missing `08_HYPERPARAMETERS.md`. The WP0 harness (`wp0.*`) is the 400-step overfit run specified in the handoff, with lr `1e-3` and weight decay `0` so a single chapter can memorize. If the plan file is restored and disagrees, update only through a new amendment.
 
 NCERT text is not redistributed. Later packages may download official PDFs and extract them locally.
+
+## 001 — WP2 corpus BPE vocab target (2026-10-01)
+
+WP2 asks for a corpus-native BPE and 512-token blocks. No plan file states the BPE vocab size. `model.vocab_size` stays 50257. Target depth, width, heads, `p_new`, and `MATCH_TOKENS` are unchanged.
+
+| WP2 data choice | Value |
+| --- | --- |
+| Tokenizer | Byte-level BPE trained on `data/clean/class_*/chapter_*.txt` only. |
+| Vocab target | 4096, min frequency 2. Not the GPT-2 vocabulary. |
+| Block length | 512. A shorter tail is counted and not stored as a block. |
+| Language-model weights | Not loaded. Not trained. |

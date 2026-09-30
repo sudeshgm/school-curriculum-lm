@@ -1,5 +1,6 @@
 torch==2.14.1+cpu
 tiktoken
+tokenizers
 pyyaml
 pytest
 pymupdf
