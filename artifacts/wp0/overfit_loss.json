@@ -1,0 +1,17 @@
+{
+  "variant": "debug",
+  "steps": 400,
+  "seed": 1337,
+  "chapter_source": "dummy",
+  "chapter_sha256": "17d1f3dc166b8f905216e54a2b2b03f294e50939edd6dd2804e6f5f48adddfd2",
+  "loss_before": 10.91673469543457,
+  "loss_after": 0.05464964359998703,
+  "loss_fell": true,
+  "num_parameters": 16287488,
+  "lr": 0.001,
+  "sequence_length": 64,
+  "batch_size": 8,
+  "train_loss_first": 10.898541450500488,
+  "train_loss_last": 0.06603696197271347,
+  "seconds": 197.4062361717224
+}
