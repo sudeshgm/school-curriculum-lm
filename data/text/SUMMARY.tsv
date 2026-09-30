@@ -1,0 +1,7 @@
+class	book	book_code	chapters	chars	whitespace_tokens	gpt2_tokens	front_matter_chars
+1	Joyful Mathematics	aejm1	13	49303	9746	14146	20246
+2	Joyful Mathematics	bejm1	11	66295	13703	21319	21063
+3	Maths Mela	cemm1	14	127560	24082	37307	19419
+4	Maths Mela	demm1	14	148989	29148	44892	22170
+5	Maths Mela	eemm1	15	166319	33543	51016	22614
+6	Ganita Prakash	fegp1	10	382093	76080	113233	30361

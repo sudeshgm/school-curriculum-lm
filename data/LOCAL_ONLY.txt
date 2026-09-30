@@ -1,0 +1,5 @@
+Local research extract of official NCERT English mathematics textbooks
+for Classes 1–6, downloaded from https://ncert.nic.in/textbook/pdf/.
+
+Not a public dataset. Do not copy these PDFs or the extracted text
+out of this project, host them, or redistribute them.
