@@ -1,0 +1,85 @@
+# School-Curriculum LM default config (WP0).
+#
+# The handoff named 08_HYPERPARAMETERS.md. That file was not in the workspace
+# (see AMENDMENTS.md, amendment 000). This file records:
+#   - locked target architecture from the handoff: 12 layers, 768 dim, 12 heads
+#   - locked 12-gram filter width (decontamination.match_tokens: 12)
+#   - p_new left unset (do not fill without an amendment)
+#   - WP0 overfit harness: 400 steps on one chapter, debug model in the 15–30M band
+#
+# train.* follows the public GPT-2 small recipe (AdamW, lr 6e-4, betas 0.9/0.95,
+# weight decay 0.1) so a later work package has a concrete from-scratch loop.
+# Those optimizer numbers are not claimed to be a missing plan file. If
+# 08_HYPERPARAMETERS.md is restored and differs, update train.* only via an
+# amendment. Do not change target depth/width, match_tokens, or p_new silently.
+#
+# The 12-layer / 768-dim model with tied token embeddings is the standard
+# GPT-2 small count, about 124M parameters. That is the ~100M-class model
+# named in the handoff. Depth and width are not reduced to force a round 100M.
+
+seed: 1337
+
+tokenizer:
+  name: gpt2
+  vocab_size: 50257
+
+model:
+  vocab_size: 50257
+  block_size: 1024
+  dropout: 0.0
+  bias: true
+  tie_embeddings: true
+  init_std: 0.02
+  # Debug flag. Exact width chosen so the tied-embedding count lands in 15–30M.
+  debug:
+    n_layer: 4
+    n_head: 4
+    n_embd: 256
+  # Locked target. Do not change without an amendment.
+  target:
+    n_layer: 12
+    n_head: 12
+    n_embd: 768
+
+train:
+  optimizer: adamw
+  lr: 6.0e-4
+  min_lr: 6.0e-5
+  weight_decay: 0.1
+  betas: [0.9, 0.95]
+  eps: 1.0e-8
+  grad_clip: 1.0
+  warmup_steps: 100
+  batch_size: 8
+  sequence_length: 1024
+  grad_accum_steps: 1
+
+# Replay probability for later curriculum stages. Unset on purpose.
+curriculum:
+  p_new: null
+
+decontamination:
+  # LOCKED 12-gram word overlap. Do not change without an amendment.
+  match_tokens: 12
+  lowercase: true
+  strip_punctuation: true
+
+eval:
+  scoring: letter_logprob
+  letters: [A, B, C, D]
+  chance_accuracy: 0.25
+  # Prompt ends here. The scored continuation is " {letter}".
+  prompt_suffix: "Answer:"
+
+# Acceptance harness only. Not the Class 1–6 run.
+wp0:
+  overfit_steps: 400
+  lr: 1.0e-3
+  weight_decay: 0.0
+  warmup_steps: 0
+  batch_size: 8
+  sequence_length: 64
+  model_variant: debug
+  log_every: 50
+  checkpoint: artifacts/wp0/overfit_chapter.pt
+  loss_log: artifacts/wp0/overfit_loss.json
