@@ -57,3 +57,32 @@ CLASS1_HELDOUT: list[dict] = [
         "answer": "D",
     },
 ]
+
+# Shown before the scored items. Not part of the scored set.
+CLASS1_FORMAT_EXAMPLES: list[dict] = [
+    {
+        "id": "f1",
+        "question": "A bicycle has how many wheels?",
+        "choices": {"A": "2", "B": "1", "C": "3", "D": "4"},
+        "answer": "A",
+    },
+    {
+        "id": "f2",
+        "question": "Dev has 1 pencil and gets 1 more. How many pencils does he have?",
+        "choices": {"A": "1", "B": "2", "C": "3", "D": "4"},
+        "answer": "B",
+    },
+    {
+        "id": "f3",
+        "question": "Which number comes just before 5?",
+        "choices": {"A": "3", "B": "6", "C": "4", "D": "7"},
+        "answer": "C",
+    },
+    {
+        "id": "f4",
+        "question": "What is 3 add 1?",
+        "choices": {"A": "5", "B": "2", "C": "6", "D": "4"},
+        "answer": "D",
+    },
+]
+

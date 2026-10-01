@@ -92,12 +92,15 @@ def render_mcq(item: dict, include_answer: bool) -> str:
     return text
 
 
-def score_mcqs(model, tokenizer, items: list[dict]) -> dict:
-    """Score items by letter log-probability. Returns accuracy against chance."""
+def score_mcqs(model, tokenizer, items: list[dict], prompt_prefix: str = "") -> dict:
+    """Score items by letter log-probability. Returns accuracy against chance.
+
+    `prompt_prefix` is optional in-context text. It is not a critic.
+    """
     rows = []
     correct = 0
     for item in items:
-        prompt = render_mcq(item, include_answer=False)
+        prompt = prompt_prefix + render_mcq(item, include_answer=False)
         scores = letter_logprobs(model, tokenizer, prompt)
         pred = predict_letter(scores)
         ok = pred == item["answer"]

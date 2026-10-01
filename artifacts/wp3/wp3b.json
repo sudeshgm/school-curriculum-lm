@@ -1,0 +1,52 @@
+{
+  "tokenizer": "corpus_bpe",
+  "vocab_size": 4096,
+  "p_new": null,
+  "resumed_from_steps": 40,
+  "extra_steps": 49,
+  "total_steps": 89,
+  "token_steps_extra": 726131,
+  "loss_at_resume": 4.299479007720947,
+  "loss_after": 1.942246437072754,
+  "train_loss_last": 1.9865089654922485,
+  "stop_reason": "loss_under_2",
+  "untrained_accuracy": 0.5,
+  "untrained_correct": 4,
+  "zero_shot_accuracy": 0.25,
+  "zero_shot_correct": 2,
+  "few_shot_accuracy": 0.25,
+  "few_shot_correct": 2,
+  "chance": 0.25,
+  "untrained_rows": [
+    "c1 gold B pred B",
+    "c2 gold C pred C",
+    "c3 gold A pred C",
+    "c4 gold D pred C",
+    "c5 gold A pred C",
+    "c6 gold B pred C",
+    "c7 gold C pred C",
+    "c8 gold D pred D"
+  ],
+  "zero_shot_rows": [
+    "c1 gold B pred C",
+    "c2 gold C pred C",
+    "c3 gold A pred C",
+    "c4 gold D pred C",
+    "c5 gold A pred C",
+    "c6 gold B pred C",
+    "c7 gold C pred C",
+    "c8 gold D pred C"
+  ],
+  "few_shot_rows": [
+    "c1 gold B pred C",
+    "c2 gold C pred C",
+    "c3 gold A pred C",
+    "c4 gold D pred C",
+    "c5 gold A pred C",
+    "c6 gold B pred C",
+    "c7 gold C pred C",
+    "c8 gold D pred C"
+  ],
+  "seconds": 193.1685311794281,
+  "optimizer_moments": "restarted"
+}

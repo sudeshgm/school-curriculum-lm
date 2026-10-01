@@ -62,3 +62,17 @@ WP3 switches the learner off tiktoken GPT-2 and onto the WP2 corpus BPE. This is
 | Objective | Next-token cross-entropy only. No critic. No RL. No pretrained LM weights. |
 
 The old ~16M debug count and ~124M target count included a 50257-word embedding table. Those counts are not preserved. Depth and width were not widened to chase them.
+
+## 003 — WP3b continues the Class 1 debug checkpoint (2026-10-01)
+
+WP3b does not change `p_new`, `MATCH_TOKENS`, depth, width, vocab, or block size. It does not train Classes 2–6 or the 12-layer model.
+
+| WP3b choice | Value |
+| --- | --- |
+| Start | `artifacts/wp3/class1_debug.pt` after 40 steps. Not a new random init. |
+| Optimizer | AdamW settings from `train.*`. Moments restart because the checkpoint did not store them. |
+| Stop | Full-batch loss under 2.0, or 200 more steps, whichever comes first. |
+| Baseline | The same debug stack at seed 1337, before any update. |
+| Format examples | Four original items, ids f1–f4. They are not scored. |
+| Objective | Next-token cross-entropy only. No critic. No pretrained LM weights. |
+
