@@ -1,0 +1,20 @@
+WP5_DONE: yes
+device: cuda
+steps: 80
+stop: step_cap
+loss_before: 8.3863
+loss_after: 3.9623
+exact_before: 0/8
+exact_after: 0/8
+letter_scoring: no
+p_new: null
+pretrained_lm_weights: no
+critic: no
+q1 gold 56 before_guess ' multiple' before_match False after_guess ' the' after_match False
+q2 gold 8 before_guess ' short' before_match False after_guess ' the' after_match False
+q3 gold 75 before_guess 'aman' before_match False after_guess ' the' after_match False
+q4 gold 27 before_guess 'lebr' before_match False after_guess ' the' after_match False
+q5 gold 12 before_guess ' is' before_match False after_guess '\n' after_match False
+q6 gold 5 before_guess ' oper' before_match False after_guess ' the' after_match False
+q7 gold 54 before_guess ' pur' before_match False after_guess ' of' after_match False
+q8 gold 121 before_guess 'alkalk' before_match False after_guess ' the following' after_match False
