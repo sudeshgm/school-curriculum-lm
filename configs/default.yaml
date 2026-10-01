@@ -20,17 +20,19 @@
 seed: 1337
 
 tokenizer:
-  name: gpt2
-  vocab_size: 50257
+  name: corpus_bpe
+  vocab_size: 4096
+  path: data/tokenizer/corpus_bpe.json
 
 model:
-  vocab_size: 50257
-  block_size: 1024
+  vocab_size: 4096
+  block_size: 512
   dropout: 0.0
   bias: true
   tie_embeddings: true
   init_std: 0.02
-  # Debug flag. Exact width chosen so the tied-embedding count lands in 15–30M.
+  # Debug flag. Depth and width unchanged by amendment 002.
+  # The parameter count is no longer ~16M: the embedding table is vocab 4096.
   debug:
     n_layer: 4
     n_head: 4
@@ -51,7 +53,7 @@ train:
   grad_clip: 1.0
   warmup_steps: 100
   batch_size: 8
-  sequence_length: 1024
+  sequence_length: 512
   grad_accum_steps: 1
 
 # Replay probability for later curriculum stages. Unset on purpose.
@@ -78,6 +80,15 @@ wp2:
   vocab_size: 4096
   block_size: 512
   min_frequency: 2
+
+# WP3: debug model only, Class 1 packed blocks only. Not a curriculum matrix.
+# AdamW numbers are the existing train.* recipe. Step count is the debug budget
+# for this one class, not a locked hyperparameter from a missing plan file.
+wp3:
+  model_variant: debug
+  class: 1
+  steps: 40
+  warmup_steps: 0
 
 # Acceptance harness only. Not the Class 1–6 run.
 wp0:

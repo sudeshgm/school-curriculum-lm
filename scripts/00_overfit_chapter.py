@@ -27,7 +27,7 @@ from sclm.config import load_yaml, model_config_from_dict
 from sclm.dummy_chapter import dummy_chapter, text_sha256
 from sclm.locks import ALLOW_PRETRAINED_LM_WEIGHTS, ALLOW_RL
 from sclm.model import GPT
-from sclm.tokenizer import GPT2Tokenizer
+from sclm.tokenizer import load_tokenizer
 
 
 def set_seed(seed: int) -> None:
@@ -45,7 +45,7 @@ def load_chapter(path: str | None) -> tuple[str, str]:
     return text, "file"
 
 
-def encode_repeated(tokenizer: GPT2Tokenizer, text: str, min_tokens: int) -> torch.Tensor:
+def encode_repeated(tokenizer, text: str, min_tokens: int) -> torch.Tensor:
     ids = tokenizer.encode(text)
     if not ids:
         raise SystemExit("Chapter tokenized to zero tokens")
@@ -104,11 +104,7 @@ def main() -> int:
     if not model.from_scratch:
         raise SystemExit("Model was not marked from_scratch")
 
-    tokenizer = GPT2Tokenizer()
-    if tokenizer.vocab_size != model_cfg.vocab_size:
-        raise SystemExit(
-            f"Tokenizer vocab {tokenizer.vocab_size} != config vocab {model_cfg.vocab_size}"
-        )
+    tokenizer = load_tokenizer(cfg, ROOT)
 
     text, source = load_chapter(args.chapter)
     seq_len = int(wp0["sequence_length"])

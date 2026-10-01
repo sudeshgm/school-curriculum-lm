@@ -45,3 +45,20 @@ WP2 asks for a corpus-native BPE and 512-token blocks. No plan file states the B
 | Vocab target | 4096, min frequency 2. Not the GPT-2 vocabulary. |
 | Block length | 512. A shorter tail is counted and not stored as a block. |
 | Language-model weights | Not loaded. Not trained. |
+
+## 002 — Learner uses the corpus BPE (2026-10-01)
+
+WP3 switches the learner off tiktoken GPT-2 and onto the WP2 corpus BPE. This is a vocabulary and context-length change. It is not a curriculum matrix.
+
+| Lock | After 002 |
+| --- | --- |
+| Tokenizer | `corpus_bpe`, file `data/tokenizer/corpus_bpe.json`. Vocab 4096. |
+| `model.vocab_size` | 4096. Was 50257. |
+| `model.block_size` | 512. Was 1024. `train.sequence_length` is 512 so a batch cannot exceed the block. |
+| Debug depth and width | Unchanged: 4 layers, 4 heads, 256 dim. |
+| Target depth and width | Unchanged: 12 layers, 12 heads, 768 dim. Not trained in WP3. |
+| `p_new` | Still null. |
+| `MATCH_TOKENS` | Still 12. |
+| Objective | Next-token cross-entropy only. No critic. No RL. No pretrained LM weights. |
+
+The old ~16M debug count and ~124M target count included a 50257-word embedding table. Those counts are not preserved. Depth and width were not widened to chase them.

@@ -1,0 +1,22 @@
+{
+  "variant": "debug",
+  "params": 4339200,
+  "tokenizer": "corpus_bpe",
+  "vocab_size": 4096,
+  "block_size": 512,
+  "class": 1,
+  "packed_blocks": 29,
+  "packed_tokens": 14848,
+  "steps": 40,
+  "token_steps": 592760,
+  "loss_before": 8.402201652526855,
+  "loss_after": 4.299479007720947,
+  "train_loss_last": 4.358778953552246,
+  "mcq_correct": 2,
+  "mcq_n": 8,
+  "mcq_accuracy": 0.25,
+  "chance": 0.25,
+  "beats_chance": false,
+  "seconds": 166.4616937637329,
+  "p_new": null
+}

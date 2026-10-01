@@ -28,9 +28,15 @@ def test_protocol_locks_are_off():
 def test_default_yaml_locks_target_and_leaves_p_new_unset():
     cfg = load_yaml(ROOT / "configs" / "default.yaml")
     assert cfg["model"]["target"] == {"n_layer": 12, "n_head": 12, "n_embd": 768}
+    assert cfg["model"]["debug"] == {"n_layer": 4, "n_head": 4, "n_embd": 256}
+    assert cfg["model"]["vocab_size"] == 4096
+    assert cfg["model"]["block_size"] == 512
+    assert cfg["tokenizer"]["name"] == "corpus_bpe"
     assert cfg["decontamination"]["match_tokens"] == 12
     assert cfg["curriculum"]["p_new"] is None
     assert cfg["wp0"]["overfit_steps"] == 400
+    assert cfg["wp3"]["class"] == 1
+    assert cfg["wp3"]["model_variant"] == "debug"
     assert cfg["eval"]["scoring"] == "letter_logprob"
     assert cfg["model"]["tie_embeddings"] is True
 
@@ -41,12 +47,12 @@ def test_debug_and_target_parameter_bands():
     target = GPT(model_config_from_dict(cfg, "target"))
     debug_n = debug.num_parameters()
     target_n = target.num_parameters()
-    assert 15_000_000 <= debug_n <= 30_000_000, debug_n
-    # 12-layer / 768-dim tied GPT-2 small is ~124M, the ~100M-class model.
-    assert 100_000_000 <= target_n <= 140_000_000, target_n
+    # Amendment 002: same depth and width, vocab 4096, block 512.
+    # Counts are lower than the old 50257-vocab models. Do not widen to chase them.
+    assert debug_n == 4_339_200, debug_n
+    assert target_n == 88_594_944, target_n
     assert debug.from_scratch is True
     assert target.from_scratch is True
-    # Tied embeddings: lm_head does not add a second vocab matrix.
     assert debug.lm_head.weight is debug.transformer.wte.weight
     assert target.lm_head.weight is target.transformer.wte.weight
 
